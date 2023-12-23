@@ -1,5 +1,4 @@
 "use client";
-import { MouseEventHandler } from "react";
 import { Button } from "../ui/button";
 import { PRODUCT_CATEGORIES } from "@/config";
 import { ChevronDown } from "lucide-react";
