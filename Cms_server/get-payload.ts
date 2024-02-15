@@ -30,7 +30,7 @@ export const getPayloadClient = async ({initOptions} : Args = {}) => {
     cached.promise = payload.init({
       local: initOptions?.express ? false : true,
       secret: process.env.PAYLOAD_SECRET,
-      ...initOptions,
+      ...(initOptions || {}),
     });
   }
 
