@@ -3,13 +3,13 @@ import { Icons } from "@/components/Icons";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { TauthSchema, authSchema } from "@/lib/Validators/auth-validators";
 import { cn } from "@/lib/utils";
+import { trpc } from "@/trpc/client";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { TauthSchema, authSchema } from "@/lib/Validators/auth-validators";
-
 
 const page = () => {
   const {
@@ -20,7 +20,9 @@ const page = () => {
     resolver: zodResolver(authSchema),
   });
 
+  const {mutate, isError, isLoading} = trpc.auth.createpayloaduser.useMutation();
   const onSubmit = ({ email, password }: TauthSchema) => {
+    mutate({email, password})
   };
 
   return (
